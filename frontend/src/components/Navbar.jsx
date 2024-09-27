@@ -4,7 +4,7 @@ import { GlobalContext } from '../context/UserContext';
 import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
-  const { authUser, logOut } = useContext(GlobalContext); 
+  const { authUser, logOut } = useContext(GlobalContext);
   const { cartItems } = useCart();
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   return (
