@@ -16,7 +16,7 @@ const Cart = () => {
       return;}
 
     try {
-      const response = await fetch("http://localhost:5000/api/checkout", {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const Cart = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Compra realizada con éxito!");
+        setMessage("Compra realizada con éxito!, sientese a esperar 😅 ");
       } else {
         setMessage(data?.error || "Ocurrió un error al procesar tu compra.");
       }
