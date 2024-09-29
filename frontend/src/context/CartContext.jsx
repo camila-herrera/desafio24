@@ -4,6 +4,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+
   const addToCart = (pizza) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(item => item.id === pizza.id);
@@ -18,10 +19,11 @@ export const CartProvider = ({ children }) => {
 
   const updateQuantity = (pizzaId, quantity) => {
     setCartItems((prevItems) =>
-      prevItems.map(item => item.id === pizzaId ? { ...item, quantity } : item ));};
+      prevItems.map(item => item.id === pizzaId ? { ...item, quantity: Math.max(quantity, 0) } : item ));};
+  const vaciarCarrito = () => { setCartItems ([])}
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, vaciarCarrito }}>
       {children}
     </CartContext.Provider>
   );};

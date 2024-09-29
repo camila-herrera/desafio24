@@ -7,7 +7,7 @@ import { GlobalContext } from '../context/UserContext';
 const Cart = () => {
   const { authUser } = useContext(GlobalContext);
   const isUserAuthenticated = authUser.token;
-  const { cartItems, removeFromCart, updateQuantity } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, vaciarCarrito } = useCart();
   const [message, setMessage] = useState(null);
   const getTotal = () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const handleCheckout = async () => {
@@ -29,6 +29,7 @@ const Cart = () => {
 
       if (response.ok) {
         setMessage("Compra realizada con éxito!, sientese a esperar 😅 ");
+        vaciarCarrito();
       } else {
         setMessage(data?.error || "Ocurrió un error al procesar tu compra.");
       }
